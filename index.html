@@ -1,0 +1,978 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>The Reposition Session — Repositioned</title>
+<meta name="description" content="I help professional service firms attract the right clients, stabilise cash flow, and permanently end the feast-and-famine cycle.">
+<meta property="og:description" content="I help professional service firms attract the right clients, stabilise cash flow, and permanently end the feast-and-famine cycle.">
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Playfair+Display:ital,wght@0,400;0,600;1,400;1,600&family=DM+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --navy: #0a1628;
+    --navy-mid: #0d1b35;
+    --navy-light: #152644;
+    --navy-card: #101e38;
+    --orange: #ff6b1a;
+    --orange-dim: rgba(255,107,26,0.15);
+    --gold: #f5c842;
+    --gold-dim: rgba(245,200,66,0.5);
+    --white: #f0ede6;
+    --grey: #7a8ba0;
+    --border: rgba(255,255,255,0.08);
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  html { scroll-behavior: smooth; }
+
+  body {
+    font-family: 'DM Sans', -apple-system, sans-serif;
+    background: var(--navy);
+    color: var(--white);
+    font-size: 16px;
+    font-weight: 300;
+    line-height: 1.7;
+    overflow-x: hidden;
+  }
+
+  a { color: inherit; }
+
+  /* ── HEADER (fixed, logo + CTA — mismo efecto que el sitio) ── */
+  nav {
+    position: fixed;
+    top: 0; left: 0; right: 0;
+    z-index: 100;
+    padding: 24px 48px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    background: linear-gradient(to bottom, rgba(10,22,40,0.98) 0%, transparent 100%);
+    backdrop-filter: blur(8px);
+  }
+  .nav-logo { display: flex; align-items: center; text-decoration: none; }
+  .nav-cta {
+    font-size: 11px;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    padding: 10px 24px;
+    border: 1px solid #ff6b1a;
+    color: #ff6b1a;
+    background: transparent;
+    text-decoration: none;
+    transition: background 0.2s, color 0.2s;
+  }
+  .nav-cta:hover { background: #ff6b1a; color: #fff; }
+  @media (max-width: 900px) {
+    nav { padding: 18px 24px; }
+    .nav-cta { font-size: 10px; padding: 8px 16px; }
+  }
+
+  /* ── HERO ── */
+  .hero {
+    background: var(--navy-mid);
+    padding: 160px 24px 96px;
+    position: relative;
+    overflow: hidden;
+  }
+  .hero::before {
+    content: '';
+    position: absolute;
+    top: -100px; right: -100px;
+    width: 460px; height: 460px;
+    border-radius: 50%;
+    background: radial-gradient(circle, rgba(255,107,26,0.10) 0%, transparent 70%);
+    pointer-events: none;
+  }
+  .hero::after {
+    content: '';
+    position: absolute;
+    bottom: -60px; left: -60px;
+    width: 260px; height: 260px;
+    border-radius: 50%;
+    background: radial-gradient(circle, rgba(21,38,68,0.9) 0%, transparent 70%);
+    pointer-events: none;
+  }
+  .hero-inner {
+    max-width: 760px;
+    margin: 0 auto;
+    position: relative;
+    z-index: 1;
+    text-align: center;
+  }
+  .hero-eyebrow {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 11px;
+    letter-spacing: 4px;
+    color: var(--orange);
+    text-transform: uppercase;
+    margin-bottom: 22px;
+    opacity: 0;
+    animation: fadeUp 0.7s ease forwards 0.1s;
+  }
+  .hero-eyebrow::before {
+    content: '';
+    width: 32px; height: 1px;
+    background: var(--orange);
+  }
+  .hero-title {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: clamp(38px, 5.6vw, 62px);
+    font-weight: 400;
+    letter-spacing: 2px;
+    color: var(--white);
+    line-height: 1.05;
+    margin-bottom: 26px;
+    opacity: 0;
+    animation: fadeUp 0.7s ease forwards 0.25s;
+  }
+  .hero-title em {
+    font-family: 'Playfair Display', serif;
+    font-style: italic;
+    color: var(--orange);
+    letter-spacing: 0;
+  }
+  .hero-sub {
+    font-size: 17px;
+    color: rgba(240,237,230,0.72);
+    line-height: 1.85;
+    max-width: 620px;
+    margin: 0 auto 40px;
+    opacity: 0;
+    animation: fadeUp 0.7s ease forwards 0.4s;
+  }
+  .hero-subline {
+    font-family: 'Playfair Display', serif;
+    font-style: italic;
+    font-size: 21px;
+    color: var(--orange);
+    line-height: 1.5;
+    max-width: 560px;
+    margin: 0 auto 22px;
+    opacity: 0;
+    animation: fadeUp 0.7s ease forwards 0.32s;
+  }
+  .hero-standout {
+    font-size: 19px;
+    font-weight: 700;
+    color: var(--white);
+    letter-spacing: 0.01em;
+    line-height: 1.5;
+    max-width: 560px;
+    margin: 22px auto;
+  }
+  .hero-cta-wrap {
+    opacity: 0;
+    animation: fadeUp 0.7s ease forwards 0.55s;
+  }
+
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(16px); }
+    to   { opacity: 1; transform: translateY(0); }
+  }
+
+  /* ── BTN PRIMARY (mismo efecto que el sitio) ── */
+  .btn-gold {
+    display: inline-block;
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 15px;
+    letter-spacing: 3px;
+    padding: 16px 40px;
+    background: var(--orange);
+    color: var(--navy);
+    text-decoration: none;
+    border-radius: 2px;
+    transition: all 0.25s;
+    position: relative;
+    overflow: hidden;
+  }
+  .btn-gold::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: rgba(255,255,255,0.18);
+    transform: translateX(-100%);
+    transition: transform 0.3s;
+  }
+  .btn-gold:hover::after { transform: translateX(0); }
+  .btn-gold:hover { box-shadow: 0 0 40px rgba(255,107,26,0.35); }
+  .hero-price-note {
+    margin-top: 16px;
+    font-size: 13px;
+    color: rgba(240,237,230,0.45);
+    letter-spacing: 0.03em;
+  }
+
+  /* MAIN */
+  .main {
+    max-width: 700px;
+    margin: 0 auto;
+    padding: 76px 24px 0;
+  }
+
+  .section { margin-bottom: 76px; }
+
+  h2.section-title {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: clamp(28px, 3.8vw, 36px);
+    font-weight: 400;
+    letter-spacing: 1.5px;
+    color: var(--white);
+    line-height: 1.2;
+    margin-bottom: 26px;
+  }
+
+  .prose p {
+    font-size: 16px;
+    line-height: 1.9;
+    color: rgba(240,237,230,0.85);
+    margin-bottom: 22px;
+  }
+  .prose p:last-child { margin-bottom: 0; }
+
+  /* PROMISE LIST */
+  .promise-list {
+    list-style: none;
+    margin: 22px 0 24px;
+    background: var(--navy-card);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 6px 0;
+  }
+  .promise-list li {
+    padding: 16px 24px;
+    font-size: 16px;
+    line-height: 1.7;
+    border-bottom: 1px solid var(--border);
+    display: flex;
+    gap: 12px;
+  }
+  .promise-list li:last-child { border-bottom: none; }
+  .promise-list .arrow {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 20px;
+    color: var(--orange);
+    flex-shrink: 0;
+    width: 20px;
+  }
+  .promise-list li { flex-direction: row; align-items: flex-start; }
+  .promise-text-wrap { display: flex; flex-direction: column; gap: 4px; }
+  .promise-main { font-weight: 600; color: var(--white); }
+  .promise-sub { font-size: 13.5px; color: var(--grey); line-height: 1.55; font-weight: 400; }
+  .promise-list.on-dark { background: rgba(255,255,255,0.04); border-color: rgba(255,255,255,0.12); }
+  .promise-list.on-dark li { border-bottom-color: rgba(255,255,255,0.08); }
+  .promise-list.on-dark .promise-main { color: var(--white); }
+  .promise-list.on-dark .promise-sub { color: rgba(240,237,230,0.55); }
+  .promise-list.on-dark .arrow { color: var(--orange); }
+  .hero-body-text { text-align: left; max-width: 640px; margin: 0 auto 22px; font-size: 16px; color: rgba(240,237,230,0.72); line-height: 1.8; }
+  .hero-opening {
+    font-family: 'Playfair Display', serif;
+    font-weight: 600;
+    font-size: 23px;
+    color: var(--white);
+    line-height: 1.5;
+    max-width: 600px;
+    margin: 0 auto 30px;
+    opacity: 0;
+    animation: fadeUp 0.7s ease forwards 0.18s;
+  }
+
+  /* HOTEL PULL QUOTE */
+  .pull-quote {
+    margin: 32px 0;
+    padding: 30px 34px;
+    border-left: 3px solid var(--orange);
+    background: var(--navy-card);
+    border-radius: 0 12px 12px 0;
+    box-shadow: 0 4px 24px rgba(0,0,0,0.25);
+  }
+  .pull-quote p {
+    font-family: 'Playfair Display', serif;
+    font-size: 20px;
+    font-style: italic;
+    color: var(--white);
+    line-height: 1.55;
+    margin: 0;
+  }
+
+  /* SESSION CARD */
+  .session-card {
+    background: var(--navy-card);
+    border: 1px solid var(--border);
+    border-radius: 14px;
+    padding: 8px;
+  }
+  .session-item {
+    display: flex;
+    gap: 18px;
+    padding: 22px;
+    border-bottom: 1px solid var(--border);
+  }
+  .session-item:last-child { border-bottom: none; }
+  .session-num {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 26px;
+    color: var(--orange);
+    flex-shrink: 0;
+    width: 32px;
+  }
+  .session-item h3 {
+    font-size: 16px;
+    font-weight: 700;
+    color: var(--white);
+    margin-bottom: 6px;
+  }
+  .session-item p {
+    font-size: 15px;
+    color: var(--grey);
+    line-height: 1.75;
+    margin: 0;
+  }
+
+  .no-frills {
+    font-size: 15px;
+    color: var(--grey);
+    line-height: 1.85;
+    margin-top: 22px;
+    padding-top: 22px;
+    border-top: 1px solid var(--border);
+  }
+
+  /* DIVIDER */
+  .divider {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    margin: 60px 0;
+  }
+  .divider-line { flex: 1; height: 1px; background: var(--border); }
+  .divider-diamond {
+    width: 8px; height: 8px;
+    background: var(--orange);
+    transform: rotate(45deg);
+    flex-shrink: 0;
+  }
+
+  /* CLOSE / CTA */
+  .close-section {
+    background: var(--navy-mid);
+    border: 1px solid var(--border);
+    border-radius: 18px;
+    padding: 56px 44px;
+    margin: 0 0 80px;
+    position: relative;
+    overflow: hidden;
+    text-align: center;
+  }
+  .close-section::before {
+    content: '';
+    position: absolute;
+    top: -70px; right: -70px;
+    width: 280px; height: 280px;
+    border-radius: 50%;
+    background: rgba(255,107,26,0.08);
+    pointer-events: none;
+  }
+  .close-text {
+    font-family: 'Playfair Display', serif;
+    font-style: italic;
+    font-size: 22px;
+    color: var(--orange);
+    line-height: 1.55;
+    max-width: 560px;
+    margin: 0 auto 36px;
+    position: relative;
+    z-index: 1;
+  }
+
+  .price-block {
+    position: relative;
+    z-index: 1;
+    margin-bottom: 36px;
+  }
+  .price-amount {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 56px;
+    color: var(--white);
+    letter-spacing: 2px;
+    line-height: 1;
+  }
+  .price-amount .gst-small {
+    font-size: 20px;
+    vertical-align: middle;
+  }
+  .price-sub {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 12px;
+    color: rgba(240,237,230,0.5);
+    margin-top: 8px;
+    letter-spacing: 2.5px;
+  }
+
+  .steps-row {
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+    flex-wrap: wrap;
+    margin-bottom: 34px;
+    position: relative;
+    z-index: 1;
+  }
+  .step-box {
+    background: rgba(255,255,255,0.04);
+    border: 1px solid rgba(255,255,255,0.12);
+    border-radius: 10px;
+    padding: 18px 22px;
+    max-width: 220px;
+    text-align: left;
+  }
+  .step-tag {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 11px;
+    letter-spacing: 2.5px;
+    text-transform: uppercase;
+    color: var(--orange);
+    margin-bottom: 8px;
+  }
+  .step-desc {
+    font-size: 13px;
+    color: rgba(240,237,230,0.65);
+    line-height: 1.6;
+  }
+
+  .cta-row {
+    display: flex;
+    justify-content: center;
+    gap: 14px;
+    flex-wrap: wrap;
+    position: relative;
+    z-index: 1;
+  }
+  .btn-outline {
+    display: inline-block;
+    background: transparent;
+    color: rgba(240,237,230,0.6);
+    font-size: 13px;
+    font-weight: 500;
+    letter-spacing: 1px;
+    padding: 15px 28px;
+    border-radius: 2px;
+    text-decoration: none;
+    border: 1px solid rgba(255,255,255,0.25);
+    transition: color 0.2s, border-color 0.2s;
+  }
+  .btn-outline:hover { color: var(--white); border-color: rgba(255,255,255,0.5); }
+
+  /* ABOUT ROY — collapsible, below close/CTA */
+  .about-section {
+    max-width: 640px;
+    margin: 0 auto 40px;
+    padding: 0 24px;
+  }
+  .about-toggle {
+    display: block;
+    text-align: center;
+    font-size: 13px;
+    color: var(--grey);
+    cursor: pointer;
+    text-decoration: underline;
+    margin-bottom: 18px;
+    transition: color 0.2s;
+  }
+  .about-toggle:hover { color: var(--orange); }
+  .about-content {
+    display: none;
+    background: var(--navy-card);
+    border: 1px solid var(--border);
+    border-radius: 14px;
+    padding: 28px 30px;
+  }
+  .about-content.show { display: block; }
+  .about-content h3 {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 24px;
+    letter-spacing: 1.5px;
+    color: var(--white);
+    font-weight: 400;
+    margin-bottom: 16px;
+  }
+  .about-content p {
+    font-size: 14.5px;
+    line-height: 1.8;
+    color: rgba(240,237,230,0.8);
+    margin-bottom: 14px;
+  }
+  .about-content p:last-child { margin-bottom: 0; }
+  .about-content strong { color: var(--orange); font-weight: 600; }
+  .about-photo-row {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    margin-bottom: 20px;
+    padding-bottom: 20px;
+    border-bottom: 1px solid var(--border);
+  }
+  .about-photo {
+    width: 64px; height: 64px;
+    border-radius: 50%;
+    object-fit: cover;
+    flex-shrink: 0;
+    border: 2px solid var(--orange-dim);
+  }
+  .about-photo-name {
+    font-family: 'Playfair Display', serif;
+    font-size: 17px;
+    font-weight: 700;
+    color: var(--white);
+  }
+  .about-photo-role {
+    font-size: 12px;
+    color: var(--grey);
+  }
+
+  /* TESTIMONIALS */
+  .testimonial-grid {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    margin: 24px 0;
+  }
+  .testimonial-card {
+    background: var(--navy-card);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 22px 24px;
+  }
+  .testimonial-quote {
+    font-family: 'Playfair Display', serif;
+    font-style: italic;
+    font-size: 17px;
+    color: var(--white);
+    line-height: 1.6;
+    margin-bottom: 14px;
+  }
+  .testimonial-attribution {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+  .testimonial-avatar {
+    width: 34px; height: 34px;
+    border-radius: 50%;
+    background: var(--orange);
+    color: var(--navy);
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 16px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+  }
+  .testimonial-name { font-size: 13px; font-weight: 700; color: var(--white); }
+  .testimonial-role { font-size: 12px; color: var(--grey); }
+
+  /* VIDEO SECTION */
+  .video-section {
+    max-width: 700px;
+    margin: 0 auto 60px;
+    padding-bottom: 44px;
+    border-bottom: 1px solid var(--border);
+  }
+  .video-wrap {
+    position: relative;
+    background: var(--navy-light);
+    border-radius: 14px;
+    overflow: hidden;
+    aspect-ratio: 9/16;
+    max-width: 340px;
+    margin: 0 auto;
+    box-shadow: 0 12px 40px rgba(0,0,0,0.4);
+    cursor: pointer;
+  }
+  .video-wrap video,
+  .video-wrap iframe {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+    border: 0;
+  }
+  .video-wrap .poster-fallback {
+    position: absolute;
+    inset: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    background: linear-gradient(135deg, var(--navy-mid), var(--navy-light));
+    color: rgba(240,237,230,0.5);
+    font-size: 13px;
+    text-align: center;
+    padding: 20px;
+  }
+  .play-btn {
+    position: absolute;
+    top: 50%; left: 50%;
+    transform: translate(-50%, -50%);
+    width: 68px; height: 68px;
+    background: var(--orange);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 6px 24px rgba(0,0,0,0.4);
+    transition: transform 0.15s;
+    z-index: 2;
+  }
+  .video-wrap:hover .play-btn { transform: translate(-50%, -50%) scale(1.06); }
+  .play-btn svg { margin-left: 4px; }
+  .video-wrap.playing .play-btn { display: none; }
+  .video-caption {
+    text-align: center;
+    font-size: 13px;
+    color: var(--grey);
+    margin-top: 14px;
+    letter-spacing: 0.02em;
+  }
+  .transcript-toggle {
+    display: block;
+    text-align: center;
+    font-size: 12px;
+    color: var(--grey);
+    margin-top: 8px;
+    cursor: pointer;
+    text-decoration: underline;
+    transition: color 0.2s;
+  }
+  .transcript-toggle:hover { color: var(--orange); }
+  .transcript-box {
+    display: none;
+    margin-top: 18px;
+    background: var(--navy-card);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    padding: 20px 24px;
+    font-size: 14px;
+    line-height: 1.8;
+    color: var(--grey);
+  }
+  .transcript-box.show { display: block; }
+  .transcript-box strong { color: var(--orange); }
+
+  /* WINS ROW */
+  .wins-row {
+    display: flex;
+    justify-content: center;
+    gap: 22px;
+    flex-wrap: wrap;
+    max-width: 640px;
+    margin: 26px auto 0;
+  }
+  .win-item {
+    flex: 1 1 160px;
+    max-width: 200px;
+    text-align: center;
+  }
+  .win-check {
+    width: 30px; height: 30px;
+    border-radius: 50%;
+    background: var(--orange-dim);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0 auto 10px;
+  }
+  .win-title {
+    font-family: 'Playfair Display', serif;
+    font-weight: 600;
+    font-size: 17px;
+    color: var(--white);
+    margin-bottom: 4px;
+    line-height: 1.3;
+  }
+  .win-desc {
+    font-size: 13px;
+    color: var(--grey);
+    line-height: 1.5;
+  }
+  .wins-row.on-dark .win-check { background: rgba(255,107,26,0.18); }
+  .wins-row.on-dark .win-title { color: var(--white); }
+  .wins-row.on-dark .win-desc { color: rgba(240,237,230,0.55); }
+
+  /* ── FOOTER ── */
+  footer {
+    background: #060f18;
+    padding: 40px 60px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 20px;
+  }
+  .footer-logo { display: flex; flex-direction: column; align-items: flex-start; text-decoration: none; gap: 6px; }
+  .footer-slogan { font-size: 11px; color: rgba(138,155,176,0.5); letter-spacing: 0.03em; font-weight: 300; line-height: 1.4; max-width: 300px; }
+  .footer-copy { font-size: 12px; color: rgba(138,155,176,0.5); }
+  .footer-copy a { color: rgba(138,155,176,0.7); text-decoration: none; transition: color 0.2s; }
+  .footer-copy a:hover { color: #f0ede6; }
+  .footer-links { display: flex; flex-direction: column; gap: 10px; list-style: none; }
+  .footer-links a {
+    font-size: 11px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: rgba(122,139,160,0.6);
+    text-decoration: none;
+    transition: color 0.2s;
+    cursor: pointer;
+  }
+  .footer-links a:hover { color: #f0ede6; }
+
+  /* ── FOOTER RESPONSIVE ── */
+  @media (max-width: 900px) {
+    footer { flex-direction: column; align-items: flex-start; gap: 24px; padding: 32px 24px; }
+    .footer-links { gap: 8px; }
+  }
+
+  @media (max-width: 600px) {
+    .hero { padding: 120px 20px 76px; }
+    .main { padding: 56px 18px 0; }
+    .close-section { padding: 44px 24px; }
+    .session-item { flex-direction: column; gap: 6px; }
+    .session-num { width: auto; }
+  }
+</style>
+</head>
+<body>
+
+<!-- HEADER -->
+<nav>
+  <a class="nav-logo" href="index.html"><img src="logo2.png" alt="Repositioned" style="height:44px; width:auto; display:block;"></a>
+  <a class="nav-cta" href="#book">Book your Session</a>
+</nav>
+
+<div class="hero">
+  <div class="hero-inner" style="max-width:680px;">
+    <p class="hero-opening">Your firm trades in promises.<br>Promises made attract clients.<br>Promises kept grow trust.<br>Broken promises destroy reputations.</p>
+    <h1 class="hero-title">Positioning Creates the Promise.<br><em>Working For You, or Against You?</em></h1>
+    <p class="hero-subline">Most don't give it the attention it deserves.</p>
+    <p class="hero-body-text">If your positioning is just a list of services rather than a specific commitment to the market, you are forcing yourself — and whoever you hand it to — to work backward.</p>
+    <p class="hero-body-text" style="margin-bottom:12px;">Every professional practice runs on one sequence, whether you manage it or not:</p>
+    <ul class="promise-list on-dark" style="text-align:left;">
+      <li><span class="arrow">1</span><div class="promise-text-wrap"><span class="promise-main">Positioning creates the promise.</span><span class="promise-sub">A specific commitment to the market—not a service description, an explicit promise you make to your clients.</span></div></li>
+      <li><span class="arrow">2</span><div class="promise-text-wrap"><span class="promise-main">Marketing distributes it.</span><span class="promise-sub">Putting that promise in front of the right decision-makers, consistently. For most firms, that is what you say on your website or your LinkedIn profile.</span></div></li>
+      <li><span class="arrow">3</span><div class="promise-text-wrap"><span class="promise-main">Sales confirms it.</span><span class="promise-sub">Verifying, in the room, that the firm's capability matches the client's reality. That is what gets communicated by whoever answers the phone, in discovery meetings, and across your correspondence.</span></div></li>
+      <li><span class="arrow">4</span><div class="promise-text-wrap"><span class="promise-main">Delivery keeps it.</span><span class="promise-sub">The actual advisory and technical execution, measured against exactly what was promised. Yet most never bother to measure the result against Stage One.</span></div></li>
+    </ul>
+    <p class="hero-body-text" style="margin-top:22px;">Leave positioning undefined, and by default, you offer the exact same as most others in the market. Yet, you still expect the client you actually want to show up.</p>
+    <p class="hero-body-text">When they don't, you aren't just left frustrated—you end up settling for whoever fills the gap.</p>
+    <p class="hero-standout" style="text-align:left; max-width:none; margin:0 0 18px;">That is not a market problem—it is a broken promise.</p>
+    <p style="font-family:'Playfair Display',serif; font-style:italic; font-size:19px; color:var(--orange); text-align:left; max-width:none; line-height:1.5; margin-bottom:34px;">You don't need more marketing tactics or a new sales script. You need the actual words to clearly define your promise to the clients you actually want to serve.</p>
+    <div class="hero-cta-wrap" style="text-align:center;">
+      <a href="#book" class="btn-gold">Book your Reposition Session →</a>
+    </div>
+  </div>
+</div>
+
+<div class="main">
+
+  <div class="video-section">
+    <div class="video-wrap" id="videoWrap" onclick="playVideo()">
+      <div class="poster-fallback" id="posterFallback" style="background:url('https://i.ytimg.com/vi/VeeWxUcFX7c/oardefault.jpg') center/cover no-repeat, linear-gradient(135deg, var(--navy-mid), var(--navy-light));">
+      </div>
+      <div class="play-btn" id="playBtn">
+        <svg width="22" height="22" viewBox="0 0 24 24" fill="#0a1628"><path d="M8 5v14l11-7z"/></svg>
+      </div>
+    </div>
+    <div style="text-align:center; margin-top:32px;">
+      <p style="font-family:'Playfair Display',serif; font-style:italic; font-size:20px; color:var(--white); line-height:1.6; max-width:580px; margin:0 auto 30px;">Not a slide deck. No agency bloat. Not homework you'll never touch.<br>We find the gap and fix it live for you in an hour.</p>
+      <a href="#book" class="btn-gold" style="display:inline-block;">Book your Reposition Session →</a>
+    </div>
+    <span class="transcript-toggle" onclick="toggleTranscript()" style="display:block; margin-top:20px;">Read the transcript instead</span>
+    <div class="transcript-box" id="transcriptBox">
+      <p><strong>0:00–0:15</strong> — So you know the problem. Loose positioning costs you the clients you actually want, and it's not a market problem — it's a broken promise. Here's exactly how we fix it, in one hour.</p><br>
+      <p><strong>0:15–0:45</strong> — Most agencies want three months and an expensive retainer to hand you a slide deck full of branding jargon. You don't need a slide deck. You need the actual words — and honestly, you don't need three months to get them. You need someone who's done this enough times to see the gap fast, and the discipline to fix it live, not workshop it for months.</p><br>
+      <p><strong>0:45–1:45</strong> — First, we find the gap — where your current language is vague or invisible, on your site, your profile, the way you describe your firm out loud. Second, we rewrite it, live, right there on the call — not homework, not a follow-up email three weeks later. Third, we draw the boundary lines — exactly who you serve, what you charge them, and who you start turning away. And fourth, you leave with it. The actual words, ready to paste into your website, your LinkedIn, your next discovery call, and the first page of your engagement letters.</p><br>
+      <p><strong>1:45–2:15</strong> — No slides. No framework. Just the language your firm needs to stop competing on price and start attracting the clients you actually built this business to serve. One hour. Done. Ready to use.</p>
+    </div>
+  </div>
+
+  <div class="section">
+    <h2 class="section-title">What Happens in the Session</h2>
+    <p style="font-size:15px; color:var(--grey); margin-bottom:22px;">One hour. One conversation. Direct, live, and built entirely around your firm.</p>
+    <div class="session-card">
+      <div class="session-item">
+        <div class="session-num">01</div>
+        <div>
+          <h3>We find the gap</h3>
+          <p>We identify exactly where your current language is loose or invisible—on your website, in your profile, and in the way you describe your firm out loud.</p>
+        </div>
+      </div>
+      <div class="session-item">
+        <div class="session-num">02</div>
+        <div>
+          <h3>We rewrite it, live</h3>
+          <p>No theory, just the actual words. We shift your positioning from a passive service description into an explicit, undeniable commitment to the market.</p>
+        </div>
+      </div>
+      <div class="session-item">
+        <div class="session-num">03</div>
+        <div>
+          <h3>We draw the boundary lines</h3>
+          <p>We define precisely who your firm serves, the premium fee it commands, and the red-flag clients you will start turning away.</p>
+        </div>
+      </div>
+      <div class="session-item">
+        <div class="session-num">04</div>
+        <div>
+          <h3>You leave with your reposition</h3>
+          <p>The exact, copy-and-paste language built to anchor your website, your LinkedIn profile, your intake discovery calls, and your proposal documents—ready that same day, not eventually.</p>
+        </div>
+      </div>
+    </div>
+    <p class="no-frills">When the hour is up, we close the laptop. You don't leave with a branding framework to think about; you leave with an operational asset that is already working. Your marketing has its distribution message, your sales process has its confirmation criteria, and your delivery team is protected from demanding, low-margin clients who never belonged on your roster in the first place. One hour. Zero fluff. A permanent shift in how your market sees your firm.</p>
+  </div>
+
+  <div class="divider"><div class="divider-line"></div><div class="divider-diamond"></div><div class="divider-line"></div></div>
+
+  <div class="section prose">
+    <h2 class="section-title">Did you ever really have this — or has the market moved without you?</h2>
+    <p>Maybe you built your positioning years ago, and it worked. But your clients have changed. Your competitors have changed. The problems people come to you with aren't quite the ones you built your pitch around anymore — and the language never caught up.</p>
+    <p>Or maybe there was never a deliberate answer to begin with. No one ever sat down and decided exactly who you wanted to attract and who you didn't want to work for.</p>
+    <p>Either way, you're in the same place now: saying yes to whoever shows up, hoping the right ones outnumber the wrong ones. Getting frustrated more often than feeling like you're enticing the right clients.</p>
+  </div>
+
+  <div class="section prose">
+    <h2 class="section-title">Trusted by Firms Who've Done the Work</h2>
+    <div class="testimonial-grid">
+      <div class="testimonial-card">
+        <div class="testimonial-quote">"[Placeholder — quote from Patrick, Sheridan Legal]"</div>
+        <div class="testimonial-attribution">
+          <div class="testimonial-avatar">P</div>
+          <div>
+            <div class="testimonial-name">Patrick</div>
+            <div class="testimonial-role">Sheridan Legal</div>
+          </div>
+        </div>
+      </div>
+      <div class="testimonial-card">
+        <div class="testimonial-quote">"[Placeholder — quote from Mark, CFOConsultant.com.au]"</div>
+        <div class="testimonial-attribution">
+          <div class="testimonial-avatar">M</div>
+          <div>
+            <div class="testimonial-name">Mark</div>
+            <div class="testimonial-role">CFOConsultant.com.au</div>
+          </div>
+        </div>
+      </div>
+      <div class="testimonial-card">
+        <div class="testimonial-quote">"[Placeholder — quote from Dee, CoastHR]"</div>
+        <div class="testimonial-attribution">
+          <div class="testimonial-avatar">D</div>
+          <div>
+            <div class="testimonial-name">Dee</div>
+            <div class="testimonial-role">CoastHR</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</div>
+
+<!-- CLOSE / CTA -->
+<div class="main" style="padding-top:0;">
+  <div class="close-section" id="book">
+    <p class="close-text">Your positioning (or lack of it) got you here. It's not a mistake to be corrected. It's a tool that's reached its limit. The work isn't fixing what you did wrong — it's building what comes next.</p>
+
+    <div class="price-block">
+      <div class="price-amount">$500<span class="gst-small">+GST</span></div>
+      <div class="price-sub">ONE HOUR · LIVE WITH ROY WEST · GOOGLE MEET</div>
+    </div>
+
+    <div class="steps-row">
+      <div class="step-box">
+        <div class="step-tag">Step 1</div>
+        <div class="step-desc">Book your hour — pick a time that works.</div>
+      </div>
+      <div class="step-box">
+        <div class="step-tag">Step 2</div>
+        <div class="step-desc">Secure your spot — complete payment to confirm.</div>
+      </div>
+    </div>
+
+    <div class="cta-row">
+      <a href="https://calendly.com/roy-west-calendar/new-meeting" target="_blank" rel="noopener" class="btn-gold">Book your time →</a>
+      <a href="https://buy.stripe.com/fZufZgcdc8vpg2G6GHg3600" target="_blank" rel="noopener" class="btn-outline">Then secure it here →</a>
+    </div>
+  </div>
+</div>
+
+<div class="about-section" id="about">
+  <span class="about-toggle" onclick="toggleAbout()">Learn more about Roy →</span>
+  <div class="about-content" id="aboutContent">
+    <div class="about-photo-row">
+      <img class="about-photo" src="https://www.repositioned.business/roy.jpeg" alt="Roy West">
+      <div>
+        <div class="about-photo-name">Roy West</div>
+        <div class="about-photo-role">Founder, Repositioned</div>
+      </div>
+    </div>
+    <h3>Why I Do This Work</h3>
+    <p>Twenty-five years. The same wall.</p>
+    <p>I've spent over two decades working with professional service firms — firms with genuine expertise, real results, and unquestionable credibility in their field.</p>
+    <p>And I kept observing the same pattern.</p>
+    <p>Firm owners, year after year, delivering excellent work — yet stuck in the same feast-and-famine cycle, losing work to less experienced competitors, watching fees negotiated down by clients who didn't fully grasp what they were paying for.</p>
+    <p>I call these the <strong>photocopied years</strong> — the same effort, the same outcomes, no matter how good the work actually was.</p>
+    <p>The frustrating part? These weren't average firms. They were among the best in their field. And they knew it.</p>
+    <p>When I asked what was holding them back, the answers always pointed outward — the market had changed, referrals had dried up, clients didn't value expertise the way they used to. Everything except the actual cause.</p>
+    <p>That's when I saw the real pattern. I'd been handing out tactics — better proposals, more content, sharper outreach. Useful tools. But tactics applied to a broken Stage One promise produce the same result every time: more effort, the same ceiling.</p>
+    <p>The problem was never ability, or even effort. It was that Stage One — positioning — had never been explicitly locked. Marketing was distributing a promise nobody had defined. Sales was fighting to prove value that was never precisely stated. Delivery was absorbing clients who were never the right fit to begin with.</p>
+    <p>So I stopped handing out tactics, and started fixing Stage One first.</p>
+    <p>That's what the Reposition Session does. One hour, at Stage One, so everything downstream finally has something solid to work with.</p>
+  </div>
+</div>
+
+<!-- FOOTER -->
+<footer>
+  <a class="footer-logo" href="index.html">
+    <img src="logo2.png" alt="Repositioned" style="height:32px; width:auto; display:block; opacity:0.7;">
+    <span class="footer-slogan">A proven program for experienced consultants who deserve to stop being overlooked.</span>
+  </a>
+  <ul class="footer-links">
+    <li><a onclick="openAbout()">Learn more about Roy →</a></li>
+    <li><a href="mailto:roy@repositioned.business" style="text-transform:none; letter-spacing:0.04em;">roy@repositioned.business</a></li>
+    <li><a href="tel:0400216231" style="letter-spacing:0.1em;">0400 216 231</a></li>
+  </ul>
+  <p class="footer-copy">Repositioned Pty Ltd &nbsp;·&nbsp; <a href="mailto:hello@repositioned.business">hello@repositioned.business</a></p>
+</footer>
+
+<script>
+function playVideo() {
+  const wrap = document.getElementById('videoWrap');
+  if (wrap.classList.contains('playing')) return;
+  const poster = document.getElementById('posterFallback');
+  const playBtn = document.getElementById('playBtn');
+  const iframe = document.createElement('iframe');
+  iframe.src = 'https://www.youtube.com/embed/VeeWxUcFX7c?autoplay=1&rel=0&playsinline=1';
+  iframe.title = 'The Reposition Session';
+  iframe.allow = 'accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share';
+  iframe.allowFullscreen = true;
+  wrap.appendChild(iframe);
+  poster.style.display = 'none';
+  playBtn.style.display = 'none';
+  wrap.classList.add('playing');
+}
+function toggleTranscript() {
+  document.getElementById('transcriptBox').classList.toggle('show');
+}
+function toggleAbout() {
+  document.getElementById('aboutContent').classList.toggle('show');
+}
+function openAbout() {
+  document.getElementById('aboutContent').classList.add('show');
+  document.getElementById('about').scrollIntoView({ behavior: 'smooth' });
+}
+</script>
+</body>
+</html>
